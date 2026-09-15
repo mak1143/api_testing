@@ -13,8 +13,14 @@ empty; don't treat it as a source of truth.
 
 ## Notes
 
-- `python_repo.py` runs top-level (module-level) code, not wrapped in a
+- `app_api.py` runs top-level (module-level) code, not wrapped in a
   `main()`/`if __name__` guard, and calls the GitHub search API over the
-  network. Importing it has side effects; run it as a script.
+  network via `requests` (unauthenticated). Importing it has side effects; run
+  it as a script: `uv run python app_api.py`. It prints to stdout only — no
+  files written, no credentials read.
+- `plotly` is in `pyproject.toml`/`uv.lock` but not imported yet; it's there for
+  the future visualization step.
+- No `.env` or token plumbing yet; `.gitignore` already excludes `.env` for when
+  auth gets added.
 - `main.py` is just the uv "hello world" scaffold entrypoint, not the real
   entrypoint of this repo's work.
